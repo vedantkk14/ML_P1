@@ -3,6 +3,7 @@ from setuptools import find_packages, setup
 from typing import List
 
 HYPEN_E_DOT = '-e .'
+# A function that will read the dependencies from requirements.txt
 def get_requirements(file_path:str)-> list[str]:
     '''
     This function will return the list of requirements
@@ -10,17 +11,18 @@ def get_requirements(file_path:str)-> list[str]:
     requirements = []
     with open(file_path) as file_obj:
         requirements = file_obj.readlines()
-        requirements = [req.replace("\n", "") for req in requirements]
+        requirements = [req.replace("\n", "") for req in requirements]          #replacing "\n" with "" to remove the new line character
 
         if HYPEN_E_DOT in requirements:
             requirements.remove(HYPEN_E_DOT)
             
     return requirements
+
 setup(
     name='ML_Project',
     version='0.0.1',
     author='Vedant K.',
     author_email='vedantkolhapure111@gmail.com',
-    packages=find_packages(),           # considers the src as a package
+    packages=find_packages(),                             # considers the src as a package
     install_requires = get_requirements('requirements.txt'),  
 )
